@@ -32,7 +32,7 @@ make
 
 ## Keypoint Matching by using ORB features for arbitary two frames
 ```
-./build/ORB_KP_opencv // OpenCV
+./build/ORB_KP_opencv
 ```
 #### ORB Keypoints
 ![ORB_features.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/ORB_features.png)
