@@ -11,14 +11,12 @@
 int main() {
     // Read Images
     /**
-     * Note: uncomment it when using terminal to compile
+     * Note: When using Clion to compile, comment these two lines and uncomment the next two lines.
      */
-    // std::string image_file1 = "./data/1.png";
-    // std::string image_file2 = "./data/2.png";
-
-    // These two lines are used in Clion, when using terminal to compile, please comment them.
-    std::string image_file1 = "../data/1.png";
-    std::string image_file2 = "../data/2.png";
+    std::string image_file1 = "./data/1.png";
+    std::string image_file2 = "./data/2.png";
+    // std::string image_file1 = "../data/1.png";
+    // std::string image_file2 = "../data/2.png";
 
     cv::Mat img_1 = cv::imread(image_file1);
     cv::Mat img_2 = cv::imread(image_file2);
@@ -45,6 +43,10 @@ int main() {
     cv::Mat outimg1;
     cv::drawKeypoints(img_1, keypoints_1, outimg1, cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT);
     cv::imshow("ORB features", outimg1);
+
+    // When using Clion to compile, please uncomment this line and comment the next line.
+    // cv::imwrite("../results/ORB_features.png", outimg1);
+    cv::imwrite("./results/ORB_features.png", outimg1);
 
     // Feature Matching based on Hamming Distance
     std::vector<cv::DMatch> matches;
@@ -89,6 +91,13 @@ int main() {
     cv::drawMatches(img_1, keypoints_1, img_2, keypoints_2, good_matches, img_good_match);
     cv::imshow("All Matches", img_match);
     cv::imshow("Good Matches", img_good_match);
+
+    // When using Clion to compile, please uncomment these two lines and comment the next two lines.
+    // cv::imwrite("../results/all_matches.png", img_match);
+    // cv::imwrite("../results/good_matches.png", img_good_match);
+    cv::imwrite("./results/all_matches.png", img_match);
+    cv::imwrite("./results/good_matches.png", img_good_match);
+
     cv::waitKey(0);
 
     return 0;
