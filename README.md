@@ -46,7 +46,7 @@ make
 ```
 ./build/LK_KP
 ```
-### Optical Flow
+### Multi-Level Optical Flow
 ![LK_Multi.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/LK_Multi.png)
 
 
