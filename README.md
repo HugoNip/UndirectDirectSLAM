@@ -20,30 +20,40 @@ make
 ```
 ./build/ORB_KP_Stereo_opencv
 ```
-#### ORB Keypoints
+### ORB Keypoints
 ![ORB_features_Stereo.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/ORB_features_Stereo.png)
 
-#### All Matches
+### All Matches
 ![all_matches_Stereo.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/all_matches_Stereo.png)
 
-#### Good Matches
+### Good Matches
 ![good_matches_Stereo.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/good_matches_Stereo.png)
 
 
 ## Keypoint Matching by using ORB features for arbitary two frames
+### ComputeORB function is defined by OpenCV
 ```
 ./build/ORB_KP_opencv
 ```
-#### ORB Keypoints
+### ORB Keypoints
 ![ORB_features.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/ORB_features.png)
 
-#### All Matches
+### All Matches
 ![all_matches.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/all_matches.png)
 
-#### Good Matches
+### Good Matches
 ![good_matches.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/good_matches.png)
 
+## Keypoint Matching by using ORB features for arbitary two frames
+### ComputeORB function is not defined by OpenCV
+```
+./build/ORB_KP_function
+```
 
-## Reference
+### Good Matches
+![matches_function.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/matches_function.png)
+
+
+# Reference
 [Source 1](https://github.com/HugoNip/VisualOdometry-KeypointsMatching)  
 [Source 2](https://github.com/HugoNip/VisualOdometry-DirectMethod)
