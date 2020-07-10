@@ -8,10 +8,10 @@
 /**
  * Note: When using Clion to compile, comment these two lines and uncomment the next two lines.
  */
-// std::string image_file1 = "./data/1.png";
-// std::string image_file2 = "./data/2.png";
-std::string image_file1 = "../data/1.png";
-std::string image_file2 = "../data/2.png";
+std::string image_file1 = "./data/1.png";
+std::string image_file2 = "./data/2.png";
+// std::string image_file1 = "../data/1.png";
+// std::string image_file2 = "../data/2.png";
 
 
 // unsigned integer type with width of 32 bits
@@ -72,7 +72,9 @@ int main(int argc, char** argv) {
     cv::Mat image_show;
     cv::drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, image_show);
     cv::imshow("Matches", image_show);
-    cv::imwrite("../results/matches_function.png", image_show);
+    // When using Clion to compile, comment this line and uncomment the next line.
+    cv::imwrite("./results/matches_function.png", image_show);
+    // cv::imwrite("../results/matches_function.png", image_show);
     cv::waitKey(0);
 
     return 0;
