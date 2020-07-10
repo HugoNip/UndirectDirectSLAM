@@ -8,10 +8,10 @@
 /**
  * Note: When using Clion to compile, comment these two lines and uncomment the next two lines.
  */
-// std::string image_file1 = "./data/LK/LK1.png";
-// std::string image_file2 = "./data/LK/LK2.png";
-std::string image_file1 = "../data/LK/LK1.png";
-std::string image_file2 = "../data/LK/LK2.png";
+std::string image_file1 = "./data/LK/LK1.png";
+std::string image_file2 = "./data/LK/LK2.png";
+// std::string image_file1 = "../data/LK/LK1.png";
+// std::string image_file2 = "../data/LK/LK2.png";
 
 class OpticalFlowTracker {
 public:
@@ -172,10 +172,16 @@ int main(int argc, char** argv) {
     cv::imshow("Tracked single level", img2_single);
     cv::imshow("Tracked multi level", img2_multi);
     cv::imshow("Tracked by opencv", img2_CV);
-
-    cv::imwrite("../results/LK_Single.png", img2_single);
-    cv::imwrite("../results/LK_Multi.png", img2_multi);
-    cv::imwrite("../results/LK_OpenCV.png", img2_CV);
+    
+    /**
+     * Note: When using Clion to compile, comment these three lines and uncomment the next three lines.
+     */
+    cv::imwrite("./results/LK_Single.png", img2_single);
+    cv::imwrite("./results/LK_Multi.png", img2_multi);
+    cv::imwrite("./results/LK_OpenCV.png", img2_CV);
+    // cv::imwrite("../results/LK_Single.png", img2_single);
+    // cv::imwrite("../results/LK_Multi.png", img2_multi);
+    // cv::imwrite("../results/LK_OpenCV.png", img2_CV);
 
     cv::waitKey(0);
 
