@@ -16,6 +16,12 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
+find_package(Sophus REQUIRED)
+include_directories(${Sophus_INCLUDE_DIRS})
+
+find_package(Pangolin REQUIRED)
+include_directories(${Pangolin_INCLUDE_DIRS})
+
 add_executable(ORB_KP_Stereo_opencv ORB_KP_Stereo_opencv.cpp)
 target_link_libraries(ORB_KP_Stereo_opencv ${OpenCV_LIBS})
 
@@ -27,3 +33,9 @@ target_link_libraries(ORB_KP_function ${OpenCV_LIBS})
 
 add_executable(LK_KP LK_KP.cpp)
 target_link_libraries(LK_KP ${OpenCV_LIBS})
+
+add_executable(LK_KP_Stereo LK_KP_Stereo.cpp)
+target_link_libraries(LK_KP_Stereo ${OpenCV_LIBS})
+
+add_executable(directSLAM directSLAM.cpp)
+target_link_libraries(directSLAM ${OpenCV_LIBS} ${Pangolin_LIBRARIES})
