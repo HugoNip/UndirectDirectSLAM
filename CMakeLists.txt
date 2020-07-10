@@ -34,8 +34,5 @@ target_link_libraries(ORB_KP_function ${OpenCV_LIBS})
 add_executable(LK_KP LK_KP.cpp)
 target_link_libraries(LK_KP ${OpenCV_LIBS})
 
-add_executable(LK_KP_Stereo LK_KP_Stereo.cpp)
-target_link_libraries(LK_KP_Stereo ${OpenCV_LIBS})
-
 add_executable(directSLAM directSLAM.cpp)
 target_link_libraries(directSLAM ${OpenCV_LIBS} ${Pangolin_LIBRARIES})
