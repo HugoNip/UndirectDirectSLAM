@@ -20,12 +20,6 @@ make
 ```
 ./build/ORB_KP_Stereo_opencv
 ```
-### ORB Keypoints
-![ORB_features_Stereo.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/ORB_features_Stereo.png)
-
-### All Matches
-![all_matches_Stereo.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/all_matches_Stereo.png)
-
 ### Good Matches
 ![good_matches_Stereo.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/good_matches_Stereo.png)
 
@@ -35,23 +29,25 @@ make
 ```
 ./build/ORB_KP_opencv
 ```
-### ORB Keypoints
-![ORB_features.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/ORB_features.png)
-
-### All Matches
-![all_matches.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/all_matches.png)
-
 ### Good Matches
 ![good_matches.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/good_matches.png)
+
 
 ## Keypoint Matching by using ORB features for arbitary two frames
 ### ComputeORB function is not defined by OpenCV
 ```
 ./build/ORB_KP_function
 ```
-
 ### Good Matches
 ![matches_function.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/matches_function.png)
+
+
+## Keypoint Matching by using Optical Flow (Lucas–Kanade method, LK) for arbitary two frames
+```
+./build/LK_KP
+```
+### Optical Flow
+![LK_Multi.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/LK_Multi.png)
 
 
 # Reference
