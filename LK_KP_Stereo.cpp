@@ -8,10 +8,10 @@
 /**
  * Note: When using Clion to compile, comment these two lines and uncomment the next two lines.
  */
-// std::string image_file1 = "./data/image_2/000006_10.png";
-// std::string image_file2 = "./data/image_3/000006_10.png";
-std::string image_file1 = "../data/image_2/000002_10.png"; // Right
-std::string image_file2 = "../data/image_3/000002_10.png"; // Left
+std::string image_file1 = "./data/image_2/000006_10.png";
+std::string image_file2 = "./data/image_3/000006_10.png";
+// std::string image_file1 = "../data/image_2/000002_10.png"; // Right
+// std::string image_file2 = "../data/image_3/000002_10.png"; // Left
 
 struct myclass {
     bool operator() (int i,int j) { return (i<j);}
