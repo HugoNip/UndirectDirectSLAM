@@ -205,7 +205,8 @@ int main(int argc, char** argv) {
         }
     }
     cv::imshow("Tracked multi level (Right, Green Circle)", img1_multi);
-    cv::imwrite("../results/LK_Multi_Stereo_Right.png", img1_multi);
+    cv::imwrite("./results/LK_Multi_Stereo_Right.png", img1_multi);
+    // cv::imwrite("../results/LK_Multi_Stereo_Right.png", img1_multi);
 
     cv::Mat img2_multi;
     cv::cvtColor(img2, img2_multi, cv::COLOR_GRAY2BGR);
@@ -218,8 +219,8 @@ int main(int argc, char** argv) {
     }
 
     cv::imshow("Tracked multi level (Left, Blue Circle)", img2_multi);
-    cv::imwrite("../results/LK_Multi_Stereo_Left.png", img2_multi);
-    // cv::imwrite("./results/LK_Multi_Stereo.png", img2_multi);
+    cv::imwrite("./results/LK_Multi_Stereo_Left.png", img2_multi);
+    // cv::imwrite("../results/LK_Multi_Stereo_Left.png", img2_multi);
 
     cv::waitKey(0);
 
