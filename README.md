@@ -50,6 +50,14 @@ make
 ![LK_Multi.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/LK_Multi.png)
 
 
+## Keypoint Matching in Direct Method based SLAM
+```
+./build/directSLAM
+```
+### Optical Flow
+![directSLAM_pointMatching.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/directSLAM_pointMatching.png)
+
+
 # Reference
 [Source 1](https://github.com/HugoNip/VisualOdometry-KeypointsMatching)  
 [Source 2](https://github.com/HugoNip/VisualOdometry-DirectMethod)
