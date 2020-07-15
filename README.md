@@ -1,6 +1,6 @@
 # Introduction
-This project shows several methods for keypoint matching in visual odometry in SLAM,
-including Single-Level ORB, Multi-Level ORB, Optical Flow based methods for feature-based (undirect) SLAM, 
+This project shows several methods for keypoint matching,
+including Single-Level ORB, Multi-Level ORB, Optical Flow based methods, 
 and the keypoint matching result in direct method SLAM.
 
 # Requirements
