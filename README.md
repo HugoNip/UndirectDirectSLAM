@@ -80,7 +80,6 @@ Matches: 65
 
 
 ### Partial Scale Invariant
-![imagepyramids.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/imagepyramids.png)
 
 ORB algorithm uses a multiscale image pyramid. An image pyramid is a multiscale representation of a single image, 
 that consist of sequences of images all of which are versions of the image at different resolutions. 
@@ -89,7 +88,9 @@ Once orb has created a pyramid it uses the fast algorithm to detect keypoints in
 By detecting keypoints at each level orb is effectively locating key points at a different scale. 
 In this way, ORB is partial scale invariant.
 
+![imagepyramids.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/imagepyramids.png)
+
 # Reference
 [Source 1](https://github.com/HugoNip/VisualOdometry-KeypointsMatching)  
-[Source 2](https://github.com/HugoNip/VisualOdometry-DirectMethod)
+[Source 2](https://github.com/HugoNip/VisualOdometry-DirectMethod)  
 [Source 3](https://medium.com/data-breach/introduction-to-fast-features-from-accelerated-segment-test-4ed33dde6d65)
