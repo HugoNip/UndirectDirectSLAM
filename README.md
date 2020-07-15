@@ -93,4 +93,4 @@ In this way, ORB is partial scale invariant.
 # Reference
 [Source 1](https://github.com/HugoNip/VisualOdometry-KeypointsMatching)  
 [Source 2](https://github.com/HugoNip/VisualOdometry-DirectMethod)  
-[Source 3](https://medium.com/data-breach/introduction-to-fast-features-from-accelerated-segment-test-4ed33dde6d65)
+[Source 3](https://medium.com/data-breach/introduction-to-orb-oriented-fast-and-rotated-brief-4220e8ec40cf)
