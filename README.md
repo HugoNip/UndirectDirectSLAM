@@ -79,6 +79,10 @@ Matches: 65
 ![matches_ORBSingleLayer.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/matches_ORBSingleLayer.png)
 
 
+### Partial Scale Invariant
+![]()
+
 # Reference
 [Source 1](https://github.com/HugoNip/VisualOdometry-KeypointsMatching)  
 [Source 2](https://github.com/HugoNip/VisualOdometry-DirectMethod)
+[Source 3](https://medium.com/data-breach/introduction-to-fast-features-from-accelerated-segment-test-4ed33dde6d65)
