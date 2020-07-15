@@ -1,5 +1,7 @@
 # Introduction
-
+This project shows several methods for keypoint matching in visual odometry in SLAM. 
+It concludes ORB, Multi-Level ORB, Optical Flow based methods in feature-based SLAM, 
+and the keypoint matching in direct method SLAM.
 
 # Requirements
 ## OpenCV
