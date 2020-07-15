@@ -11,10 +11,10 @@
 /**
  * Note: When using Clion to compile, comment these two lines and uncomment the next two lines.
  */
-// std::string image_file1 = "./data/1.png";
-// std::string image_file2 = "./data/2.png";
-std::string image_file1 = "../data/000085_10.png";
-std::string image_file2 = "../data/000086_10.png";
+std::string image_file1 = "./data/000085_10.png";
+std::string image_file2 = "./data/000086_10.png";
+// std::string image_file1 = "../data/000085_10.png";
+// std::string image_file2 = "../data/000086_10.png";
 
 
 // unsigned integer type with width of 32 bits
