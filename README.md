@@ -57,6 +57,25 @@ make
 ### Optical Flow
 ![directSLAM_pointMatching.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/directSLAM_pointMatching.png)
 
+## Keypoint Matching by using Multi-Level ORB features
+```
+./build/ORB_KP_Multilevel
+```
+### Multi-Level result
+Extract ORB cost = 0.0118106 seconds.  
+Match ORB cost = 0.0142241 seconds.  
+Matches: 112  
+
+![matches_ORBMultiLayer.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/matches_ORBMultiLayer.png)
+
+
+### Single-Level result
+Extract ORB cost = 0.00274763 seconds.   
+Match ORB cost = 0.00102879 seconds.   
+Matches: 65  
+
+![]()
+
 
 # Reference
 [Source 1](https://github.com/HugoNip/VisualOdometry-KeypointsMatching)  
