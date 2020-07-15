@@ -3,6 +3,7 @@
 #include <nmmintrin.h>
 #include <chrono>
 #include <Eigen/Core>
+#include <Eigen/Dense>
 #include <Eigen/SparseCore>
 
 
@@ -19,7 +20,7 @@ std::string image_file2 = "../data/000086_10.png";
 // unsigned integer type with width of 32 bits
 typedef std::vector<uint32_t> DescType; // descriptor type
 typedef std::vector<std::vector<cv::DMatch>> VecVecDMatch;
-typedef Eigen::SparseMatrix<double> SpMat;
+
 
 
 /**
@@ -467,9 +468,9 @@ void ComputeORBMultiLayer(const cv::Mat &img, std::vector<std::vector<cv::KeyPoi
                      std::vector<std::vector<DescType>> &descriptors) {
 
     // parameters
-    int pyramids = 4;
+    int pyramids = 3;
     double pyramid_scale = 0.5;
-    double scales[] = {1.0, 0.5, 0.25, 0.125}; // 0, 1, 2
+    double scales[] = {1.0, 0.5, 0.25}; // 0, 1, 2
 
     // keypoints pyramids
     std::vector<cv::KeyPoint> keypoints_org;
@@ -555,9 +556,8 @@ void BfMatchMultiLayer(const std::vector<std::vector<DescType>> &desc1,
                        const std::vector<std::vector<DescType>> &desc2,
                        std::vector<cv::DMatch> &matches) {
 
-    std::vector<VecVecDMatch> matches_pyr_MultiLevel; // 3
-
     // define a sparse matrix to store distance
+
     int n1 = desc1[0].size();
     int n2 = desc2[0].size();
     if (desc1.size() > 0 && desc2.size() > 0) {
@@ -566,35 +566,170 @@ void BfMatchMultiLayer(const std::vector<std::vector<DescType>> &desc1,
         for (int j = 1; j < desc2.size(); ++j)
             n2 = desc2[j].size() > n2 ? desc2[j].size() : n2;
     }
-    int matrix_size = (n1 < n2) ? n1 : n2;
-    SpMat matrix_query(matrix_size, matrix_size);
+
+    // int matrix_size = (n1 < n2) ? n1 : n2;
+    // Eigen::Matrix<float, 6, 6> QueryMat = Eigen::Matrix<float, 6, 6>::Zero();
+    std::vector<std::vector<double>> QueryMat(n1);
+    for ( int i = 0 ; i < n1 ; i++)
+        QueryMat[i].resize(n2);
 
     // for each level in reference image
-    for (int i = 0; i < desc1.size(); ++i) {
-        std::cout << "desc1: " << desc1[i].size() << std::endl; // 3668
+    for (size_t i = 0; i < desc1.size(); ++i) {
+        if (desc1[i].empty()) continue;
 
-        VecVecDMatch matches_pyr_SingleLevel; // 3
         // for each level in query image
-        for (int j = 0; j < desc2.size(); ++j) {
-            std::cout << "desc2: " << desc2[j].size() << std::endl; // 2288
+        for (size_t j = 0; j < desc2.size(); ++j) {
+            if (desc2[i].empty()) continue;
 
             std::vector<cv::DMatch> matches_pyr;
             // matches_pyr: DMatch{_queryIdx, _trainIdx, _distance)
             BfMatch(desc1[i], desc2[j], matches_pyr);
-            std::cout << matches_pyr.size() << std::endl;
-            // matches_pyr_SingleLevel: vector<DMatch{_queryIdx, _trainIdx, _distance)>
-            matches_pyr_SingleLevel.push_back(matches_pyr);
-            /*
+
+            if (matches_pyr.size() == 0) continue;
+            // printf("\n------ Level %d, %d ------\n", i, j);
+            // printf("desc1: %d, desc2: %d, matches: %d\n", desc1[i].size(), desc2[j].size(), matches_pyr.size());
+
             for (int k = 0; k < matches_pyr.size(); ++k) {
+                /*
                 std::cout << matches_pyr[k].queryIdx << std::endl;
                 std::cout << matches_pyr[k].trainIdx << std::endl;
                 std::cout << matches_pyr[k].distance << std::endl;
-                std::cout << "done!" << std::endl;
+                 */
+
+                // compare with existed value, and update in QueryMat
+                if (QueryMat[matches_pyr[k].queryIdx][matches_pyr[k].trainIdx] == 0 ||
+                        QueryMat[matches_pyr[k].queryIdx][matches_pyr[k].trainIdx] > matches_pyr[k].distance) {
+                    // insert a new element
+                    // std::cout << "old value: " << QueryMat[matches_pyr[k].queryIdx][matches_pyr[k].trainIdx] << std::endl;
+                    // std::cout << "new value: " << matches_pyr[k].distance << std::endl;
+                    QueryMat[matches_pyr[k].queryIdx][matches_pyr[k].trainIdx] = matches_pyr[k].distance;
+                }
+                /* else if (QueryMat[matches_pyr[k].queryIdx][matches_pyr[k].trainIdx] <= matches_pyr[k].distance) {
+                    std::cout << "no update" << std::endl;
+                }
+                std::cout << "****************************" << std::endl;
+                */
             }
-             */
-            std::cout << "done" << std::endl;
+            // std::cout << "done!" << std::endl;
         }
-        // matches_pyr_MultiLevel: vector<vector<DMatch{_queryIdx, _trainIdx, _distance)>>
-        matches_pyr_MultiLevel.push_back(matches_pyr_SingleLevel);
     }
+
+    // select minimum distance
+    // for desc1(row)-major
+    for (int i = 0; i < n1; ++i) {
+        // initialize
+        int minR = QueryMat[i][0];
+        // int numC = 0;
+        int numOldR = 0, numOldC = 0;
+
+        for (int j = 0; j < n2; ++j) {
+            if (QueryMat[i][j] == 0) continue;
+
+            // std::cout << "new value: " << QueryMat[i][j] << std::endl;
+
+            if (minR == 0) {
+                minR = QueryMat[i][j];
+                // numC = j;
+                numOldR = i;
+                numOldC = j;
+                // printf("min value: [%d, %d]: %d\n", i, numC, minR);
+            }
+
+            // update
+            if (QueryMat[i][j] < minR) {
+
+                // printf("old position value: [%d, %d]\n", numOldR, numOldC);
+                // std::cout << QueryMat[numOldR][numOldC] << std::endl;
+
+                QueryMat[numOldR][numOldC] = 0;
+
+                // printf("old position value after: [%d, %d]\n", numOldR, numOldC);
+                // std::cout << QueryMat[numOldR][numOldC] << std::endl;
+
+                minR = QueryMat[i][j];
+                // numC = j;
+                // printf("update value: [%d, %d]: %d\n", i, numC, minR);
+
+            } else if (QueryMat[i][j] > minR && minR != 0) {
+                // std::cout << "zero value: " << QueryMat[i][j] << std::endl;
+                QueryMat[i][j] = 0;
+                // std::cout << "zero value after: " << QueryMat[i][j] << std::endl;
+            }
+            // std::cout << "done!" << std::endl;
+        }
+        /*
+        if (minR != 0) {
+            printf("[%d, %d], min: %d\n", i, numC, minR);
+            std::cout << "--------------------------" << std::endl;
+        }
+         */
+    }
+    // std::cout << "done" << std::endl;
+
+    // for desc2(column)-major
+    for (int j = 0; j < n2; ++j) {
+        // initialize
+        int minC = QueryMat[0][j];
+        // int numR = 0;
+        int numOldR = 0, numOldC = 0;
+
+        for (int i = 0; i < n1; ++i) {
+            if (QueryMat[i][j] == 0) continue;
+
+            // std::cout << "new value: " << QueryMat[i][j] << std::endl;
+
+            if (minC == 0) {
+                minC = QueryMat[i][j];
+                // numR = i;
+                numOldR = i;
+                numOldC = j;
+                // printf("min value: [%d, %d]: %d\n", numR, j, minC);
+            }
+
+            // update
+            if (QueryMat[i][j] < minC) {
+
+                // printf("old position value: [%d, %d]\n", numOldR, numOldC);
+                // std::cout << QueryMat[numOldR][numOldC] << std::endl;
+
+                QueryMat[numOldR][numOldC] = 0;
+
+                // printf("old position value after: [%d, %d]\n", numOldR, numOldC);
+                // std::cout << QueryMat[numOldR][numOldC] << std::endl;
+
+                minC = QueryMat[i][j];
+                // numR = i;
+                // printf("update value: [%d, %d]: %d\n", numR, j, minC);
+
+            } else if (QueryMat[i][j] > minC && minC != 0) {
+                // std::cout << "zero value: " << QueryMat[i][j] << std::endl;
+                QueryMat[i][j] = 0;
+                // std::cout << "zero value after: " << QueryMat[i][j] << std::endl;
+            }
+            // std::cout << "done!" << std::endl;
+        }
+
+        /*
+        if (minC != 0) {
+            printf("[%d, %d], min: %d\n", numR, j, minC);
+            std::cout << "--------------------------" << std::endl;
+        }
+         */
+    }
+
+    // store to matches
+    for (int i = 0; i < n1; ++i) {
+        cv::DMatch m{i, 0, 0};
+        for (int j = 0; j < n2; ++j) {
+            if (QueryMat[i][j] != 0) {
+                m.trainIdx = j;
+                m.distance = QueryMat[i][j];
+                // printf("update value [%d, %d]", i, j);
+                // std::cout << QueryMat[i][j] << std::endl;
+                matches.push_back(m);
+            }
+        }
+    }
+    std::cout << "match size: " << matches.size() << std::endl;
+
 }
