@@ -14,17 +14,9 @@ double fx = 718.856, fy = 718.856, cx = 607.1928, cy = 185.2157;
 double baseline = 0.573;
 
 // data paths
-/**
- * Note: When using Clion to compile, comment these three lines and uncomment the next three lines.
- */
-std::string left_file = "./data/left.png";
-std::string disparity_file = "./data/disparity.png";
-boost::format fmt_others("./data/image_direct/%06d.png"); // other files
-/*
 std::string left_file = "../data/left.png";
 std::string disparity_file = "../data/disparity.png";
 boost::format fmt_others("../data/image_direct/%06d.png"); // other files
-*/
 
 class JacobianAccumulator {
 public:
