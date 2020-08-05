@@ -90,10 +90,10 @@ In this way, ORB is partial scale invariant.
 
 ![imagepyramids.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/imagepyramids.png)
 
-### SIFT
+## SIFT
 ![figure_1.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/figure_1.png)
 
-### SURF
+## SURF
 ![figure_2.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/figure_2.png)
 
 # Reference
