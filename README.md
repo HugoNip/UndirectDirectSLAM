@@ -90,6 +90,12 @@ In this way, ORB is partial scale invariant.
 
 ![imagepyramids.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/imagepyramids.png)
 
+### SIFT
+![figure_1.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/figure_1.png)
+
+### SURF
+![figure_2.png](https://github.com/HugoNip/UndirectDirectSLAM/blob/master/results/figure_2.png)
+
 # Reference
 [Source 1](https://github.com/HugoNip/VisualOdometry-KeypointsMatching)  
 [Source 2](https://github.com/HugoNip/VisualOdometry-DirectMethod)  
